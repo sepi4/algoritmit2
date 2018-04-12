@@ -1,0 +1,22 @@
+Lisays (varo MAX):
+
+solmun halkaisu (halkaisu tehdaan haun yhteydessa kaikille 
+  solmuille, juuresta alkaen)
+ [][][][]              
+       |             =>   
+[][][][a][][][]
+
+
+[][][][a][]              
+     /   \           =>   
+[][][]  [][][]
+
+
+juuri solmulle uusitaso:
+ [][][][a][][][]   =>
+      /   \          
+  [][][]  [][][] 
+  
+
+Poisto (varo MIN):
+
