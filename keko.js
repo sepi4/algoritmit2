@@ -4,8 +4,8 @@ function getReunatValit(h) {
     let reuna;
     let vali;
     if (i === 0) {
-      reuna = 0;
-      vali = 1;
+      reuna = 1;
+      vali = 3;
       reunatValit.push([reuna, vali]);
     }
     else {
@@ -18,38 +18,57 @@ function getReunatValit(h) {
   return reunatValit;
 }
 
+function getRivi(rv, kerros, t, merkki) {
+  let maara = 0;
+  let rivi = "";
+  for (let i = 0; i < rv[kerros][0]; i++) // reuna
+    rivi += " ";
+  
+  for (let j = 0; j < Math.pow(2, kerros); j++) {
+    let index = Math.pow(2, kerros) + j;
+    if (index > t.length - 1)
+      break;
+
+    if (merkki === "|")
+      rivi += "|";
+    else if (merkki === "_")
+      rivi += " ";
+    else
+      rivi += t[index];
+
+    maara++;
+    if (maara >= Math.pow(2, kerros))  // rivin viimeinen merkki
+      return rivi;
+
+    for (let i = 0; i < rv[kerros][1]; i++) // väli
+      if (j % 2 === 0 && merkki === "_")
+        if (i === (rv[kerros][1] - 1)/2)
+          rivi += "|";
+        else 
+          rivi += "_";
+      else 
+        rivi += " ";
+  }
+  return rivi;
+}
+
 
 function tulostaKeko(t) {
   let h = 0;
   h = Math.floor(Math.log2(t.length - 1) + 1);
-
   let rv = getReunatValit(h);
-
-  let vanhaKerros = 0;
+  
   let str = "";
-  let kerros = 0;
-  let lastIndex;
-  for (let i = 1; i < t.length; i++) {
-    kerros = Math.floor(Math.log2(i) + 1);
-
-    if (vanhaKerros < kerros) { // reunan tulostus
-      str += "\n";
-      //reuna
-      for (let r = 0; r < rv[kerros - 1][0]; r++) {
-        str += " ";
-      }
-      vanhaKerros = kerros;
+  for (let i = 0; i < rv.length; i++) {
+    if (i > 0) { // ei jos ensimmäinen rivi
+      str += getRivi(rv, i, t, "_") + "\n";
+      str += getRivi(rv, i, t, "|") + "\n";
     }
-
-    str += t[i];
-    //vali
-    for (let r = 0; r < rv[kerros - 1][1]; r++) {
-      str += " ";
-    }
+    str += getRivi(rv, i, t) + "\n";
   }
-
   console.log(str);
 }
+
 
 function randomInt(min, max) {
   return Math.floor(min + Math.random() * (max - min));
@@ -58,12 +77,12 @@ function randomInt(min, max) {
 function lisaaKekoon(a, alkio) {
   // a[0]:ssa on kekon koko
   if (a[0] >= a.length - 1)
-    return false;
+    a.push(); // kasvatetaan taulukkoa
   a[0]++;
   let i = a[0];
-  while (i > 1 && a[i/2] > alkio) {
-    a[i] = a[i/2];
-    i = i/2;
+  while (i > 1 && a[Math.floor(i/2)] > alkio) {
+    a[i] = a[Math.floor(i/2)];
+    i = Math.floor(i/2);
   }
   a[i] = alkio;
 }
@@ -115,17 +134,18 @@ function kekolajittelu(a) {
 
 
 let t = [];
-for (let i = 0; i < 10; i++) 
+for (let i = 0; i < 15; i++) 
   t.push(randomInt(0,10));
 t[0] = t.length - 1;
 
-// teeKeko(t);
-// tulostaKeko(t);
 
 console.log("Keko ennen lajittelua:")
 tulostaKeko(t);
-kekolajittelu(t);
+console.log("Lisäys:")
+lisaaKekoon(t, 0);
+tulostaKeko(t);
 console.log("Keko jälkeen lajittelun:")
+kekolajittelu(t);
 tulostaKeko(t);
 
 let resultArr = [];
@@ -135,5 +155,4 @@ for (let i = 1; i < t.length; i++)
 let resultStr = resultArr.join(", ");
 console.log("Lajiteltu taukukko:");
 console.log(resultStr);
-
 
