@@ -9,14 +9,15 @@ function getReunatValit(h) {
       reunatValit.push([reuna, vali]);
     }
     else {
-      reuna = reunatValit[i - 1][0] * 2 + 2;
-      vali = reuna * 2 + 3;
+      reuna = reunatValit[i - 1][0] * 2 + 1;
+      vali = reuna * 2 + 1;
       reunatValit.push([reuna, vali]);
     }
   }
   reunatValit = reunatValit.reverse();
   return reunatValit;
 }
+
 
 function tulostaKeko(t) {
   let h = 0;
@@ -30,33 +31,23 @@ function tulostaKeko(t) {
   let lastIndex;
   for (let i = 1; i < t.length; i++) {
     kerros = Math.floor(Math.log2(i) + 1);
-    if (kerros >= h) {
-      lastIndex = i;
-      break;
-    }
 
     if (vanhaKerros < kerros) { // reunan tulostus
       str += "\n";
+      //reuna
       for (let r = 0; r < rv[kerros - 1][0]; r++) {
         str += " ";
       }
       vanhaKerros = kerros;
     }
+
     str += t[i];
+    //vali
     for (let r = 0; r < rv[kerros - 1][1]; r++) {
       str += " ";
     }
   }
 
-  str += "\n";
-  str += " ";
-  for (let i = lastIndex; i < t.length; i++) {
-    str += t[i];
-    if (i % 2 === 0)
-      str += " ";
-    else
-      str += "     ";
-  }
   console.log(str);
 }
 
