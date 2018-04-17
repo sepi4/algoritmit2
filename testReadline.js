@@ -4,6 +4,7 @@ let n;
 let timeOfCalculation = 0;
 let answers = [];
 let possibleCols = [];
+let numAnswers = 0;
 for (let i = 0; i < n; i++)
   possibleCols.push(i);
 main();
@@ -46,6 +47,7 @@ function main() {
     n = parseInt(numero);
     rl.close();
     calculate();
+    console.log("Num of answers", numAnswers);
   });
 
 }
@@ -112,7 +114,8 @@ function nFor(y, depth, size) {
     if (check(y, i)) {
       grid[y][i] = "Q";
       if (depth === 1)
-        answers.push(getAnswer(grid));
+        // answers.push(getAnswer(grid));
+        numAnswers++;
       nFor(y + 1, depth - 1, size);
     }
     grid[y][i] = "";

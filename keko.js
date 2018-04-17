@@ -29,7 +29,7 @@ function getRivi(rv, kerros, t, merkki) {
     if (index > t.length - 1)
       break;
 
-    if (merkki === "|")
+    if (merkki === "|") 
       rivi += "|";
     else if (merkki === "_")
       rivi += " ";
@@ -42,16 +42,16 @@ function getRivi(rv, kerros, t, merkki) {
 
     for (let i = 0; i < rv[kerros][1]; i++) // väli
       if (j % 2 === 0 && merkki === "_")
-        if (i === (rv[kerros][1] - 1)/2)
+        if (i === Math.floor((rv[kerros][1] - 1)/2)) {// keskella "|"
           rivi += "|";
-        else 
+        }
+        else  // reunoilla "_"
           rivi += "_";
       else 
         rivi += " ";
   }
   return rivi;
 }
-
 
 function tulostaKeko(t) {
   let h = 0;
@@ -68,7 +68,6 @@ function tulostaKeko(t) {
   }
   console.log(str);
 }
-
 
 function randomInt(min, max) {
   return Math.floor(min + Math.random() * (max - min));
@@ -132,27 +131,30 @@ function kekolajittelu(a) {
   }
 }
 
+function main() {
+  let t = [];
+  for (let i = 0; i < 29; i++)
+    t.push(randomInt(0, 10));
+  t[0] = t.length - 1;
 
-let t = [];
-for (let i = 0; i < 15; i++) 
-  t.push(randomInt(0,10));
-t[0] = t.length - 1;
 
+  console.log("Keko ennen lajittelua:")
+  tulostaKeko(t);
+  // console.log("Lisäys:")
+  // lisaaKekoon(t, 0);
+  // tulostaKeko(t);
+  // console.log("Keko jälkeen lajittelun:")
+  // kekolajittelu(t);
+  // tulostaKeko(t);
 
-console.log("Keko ennen lajittelua:")
-tulostaKeko(t);
-console.log("Lisäys:")
-lisaaKekoon(t, 0);
-tulostaKeko(t);
-console.log("Keko jälkeen lajittelun:")
-kekolajittelu(t);
-tulostaKeko(t);
+  // let resultArr = [];
+  // for (let i = 1; i < t.length; i++)
+  //   resultArr.push(t[i]);
 
-let resultArr = [];
-for (let i = 1; i < t.length; i++) 
-  resultArr.push(t[i]);
+  // let resultStr = resultArr.join(", ");
+  // console.log("Lajiteltu taukukko:");
+  // console.log(resultStr);
 
-let resultStr = resultArr.join(", ");
-console.log("Lajiteltu taukukko:");
-console.log(resultStr);
+}
 
+main();

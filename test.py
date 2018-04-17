@@ -1,6 +1,7 @@
+import time
 grid = []
 w = 0
-answers = []
+answers = 0
 
 def getWidth():
   x = input("Syötä laudan leveys: ")
@@ -17,7 +18,6 @@ def isInt(strNum):
     return True
   except ValueError:
     return False
-  
 
   
 def check(qY, qX):
@@ -58,24 +58,21 @@ def check(qY, qX):
   return True
 
 
-
-
 def main():
   global w
   global answers
   w = getWidth()
   print('Laudan leveys on ' + str(w))
   for x in range(0, w):
-    grid.append([""]*w)
+    grid.append([" "]*w)
 
   grid[0][0] = "Q"
-
-  for a in grid:
-    print(a)
   
+  aloitusaika = time.time()
   nFor(0, w, w)
-  
-  print(len(answers))
+  lopetusaika = time.time()
+  print(answers)
+  print(lopetusaika - aloitusaika)
   
 def nFor(y, depth, size):
   global answers
@@ -85,10 +82,11 @@ def nFor(y, depth, size):
     if (check(y, i)):
       grid[y][i] = "Q"
       if depth == 1:
-        answers.append(1)
+        # answers.append(1)
+        answers = answers + 1
+        
       nFor(y + 1, depth - 1, size)
     grid[y][i] = ""
-    
 
 
 main()
