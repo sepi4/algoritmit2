@@ -22,38 +22,84 @@ def isInt(strNum):
   
 def check(qY, qX):
   # up left
-  for y, x in zip(range(qY-1, -1, -1), range(qX-1, -1, -1)):  
+  y = qY-1
+  x = qX-1
+  while y >= 0 and x >= 0:
     if grid[y][x] == "Q":
       return False
+    y -= 1 
+    x -= 1
+
+  # for y, x in zip(range(qY-1, -1, -1), range(qX-1, -1, -1)):  
+  #   if grid[y][x] == "Q":
+  #     return False
 
   # up right
-  for y, x in zip(range(qY-1, -1, -1), range(qX+1, w, +1)):  
+  y = qY-1
+  x = qX+1
+  while y >= 0 and x < w:
     if grid[y][x] == "Q":
       return False
+    y -= 1 
+    x += 1
+
+  # for y, x in zip(range(qY-1, -1, -1), range(qX+1, w, +1)):  
+  #   if grid[y][x] == "Q":
+  #     return False
       
   # down left
-  for y, x in zip(range(qY+1, w, +1), range(qX-1, -1, -1)):  
+  y = qY+1
+  x = qX-1
+  while y < w and x >= 0:
     if grid[y][x] == "Q":
       return False
+    y += 1 
+    x -= 1
+  # for y, x in zip(range(qY+1, w, +1), range(qX-1, -1, -1)):  
+  #   if grid[y][x] == "Q":
+  #     return False
 
   # down right
-  for y, x in zip(range(qY+1, w, +1), range(qX+1, w, +1)):  
+  y = qY+1
+  x = qX+1
+  while y < w and x < w:
     if grid[y][x] == "Q":
       return False
+    y += 1 
+    x += 1
+  # for y, x in zip(range(qY+1, w, +1), range(qX+1, w, +1)):  
+  #   if grid[y][x] == "Q":
+  #     return False
 
   # up down
-  for y in range(0, w):
+  y = 0
+  while y < w:
     if y == qY:
+      y += 1 
       continue
     if grid[y][qX] == "Q":
       return False
+    y += 1 
+  # for y in range(0, w):
+  #   if y == qY:
+  #     continue
+  #   if grid[y][qX] == "Q":
+  #     return False
 
   # left right
-  for x in range(0, w):
-    if x == qX:
+  x = 0
+  while x < w:
+    if x == qY:
+      x += 1 
       continue
     if grid[qY][x] == "Q":
       return False
+    x += 1 
+  # for x in range(0, w):
+  #   if x == qX:
+  #     continue
+  #   if grid[qY][x] == "Q":
+  #     return False
 
   return True
 

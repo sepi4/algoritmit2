@@ -3,6 +3,7 @@ let c = 0;
 let n;
 let timeOfCalculation = 0;
 let answers = [];
+// let answers = 0;
 let possibleCols = [];
 let numAnswers = 0;
 for (let i = 0; i < n; i++)
@@ -112,13 +113,13 @@ function nFor(y, depth, size) {
   if (depth <= 0) return;
   for (let i = 0; i < size; i++) {
     if (check(y, i)) {
-      grid[y][i] = "Q";
+      grid[y][i] = true;
       if (depth === 1)
         // answers.push(getAnswer(grid));
         numAnswers++;
       nFor(y + 1, depth - 1, size);
     }
-    grid[y][i] = "";
+    grid[y][i] = false;
   }
 }
 
@@ -151,7 +152,7 @@ function getAnswer(grid) {
   let answer = [];
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === "Q") {
+      if (grid[i][j]) {
         answer.push(j);
       }
     }
@@ -165,29 +166,29 @@ function check(qY, qX) {
   c++;
   //up left
   for (let y = qY - 1, x = qX - 1; y >= 0 && x >= 0; y-- , x--) {
-    if (grid[y][x] === "Q") return false;
+    if (grid[y][x]) return false;
   }
   //up right
   for (let y = qY - 1, x = qX + 1; y >= 0 && x < n; y-- , x++) {
-    if (grid[y][x] === "Q") return false;
+    if (grid[y][x]) return false;
   }
   //down left 
   for (let y = qY + 1, x = qX - 1; y < n && x >= 0; y++ , x--) {
-    if (grid[y][x] === "Q") return false;
+    if (grid[y][x]) return false;
   }
   //down right
   for (let y = qY + 1, x = qX + 1; y < n && x < n; y++ , x++) {
-    if (grid[y][x] === "Q") return false;
+    if (grid[y][x]) return false;
   }
   //up down
   for (let y = 0; y < n; y++) {
     if (y === qY) continue;
-    if (grid[y][qX] === "Q") return false;
+    if (grid[y][qX]) return false;
   }
   // left right
   for (let x = 0; x < n; x++) {
     if (x === qX) continue;
-    if (grid[qY][x] === "Q") return false;
+    if (grid[qY][x]) return false;
   }
   return true;
 }

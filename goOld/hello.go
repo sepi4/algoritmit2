@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Hello World")
@@ -46,4 +48,26 @@ func main() {
 	numSlice2 := numSlice[1:4]
 	fmt.Println(numSlice2)
 
+	fmt.Println("----------Pointers-------------")
+
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8}
+
+	for i := 0; i < len(arr); i++ {
+		fmt.Println(i, &arr[i])
+	}
+	// fmt.Println(&arr[0])
+	// fmt.Println(&arr[1])
+	// fmt.Println(&arr[2])
+
+	// http.HandleFunc("/", handler)
+	// http.HandleFunc("/kissa", handler2)
+	// http.ListenAndServe(":8080", nil)
+
 }
+
+// func handler(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Fprintf(w, "Koti\n")
+// }
+// func handler2(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Fprintf(w, "Kissa\n")
+// }
