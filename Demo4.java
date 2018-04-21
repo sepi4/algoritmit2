@@ -1,3 +1,4 @@
+
 public class Demo4 {
   public static String[] haeSanat(String lause) {
     String[] arr = new String[100];

@@ -1,0 +1,3 @@
+# Rekursioyhtälöt
+- kissa
+- $$\Theta$$
